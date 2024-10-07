@@ -24,3 +24,8 @@ be useful to you!
 ## Non Goals
 
 1. Adding new features to tmux (other than what is required to embed this API)
+
+> There may a few added features, such as how to source the lua config? Do you
+> have to pick either tmux.lua or tmux.conf? Or should there be a source-lua or
+> extension to the source-file command which pulls in the lua configuration?
+> Solution TBD.
