@@ -1,5 +1,6 @@
 local tmux = require("tmux")
 
-tmux.source({ "hello" })
+tmux.source({ "intable" })
+tmux.source("foo", "bar", "baz")
 
 tmux.print_config()

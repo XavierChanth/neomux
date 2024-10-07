@@ -2,32 +2,36 @@ local config = {}
 -- TODO how to handle nested commands? like bind-key?
 local function make_config_metatable(cmd)
 	return setmetatable({}, {
-		__call = function(_, args)
+		__call = function(_, args, ...)
 			local t = { cmd = cmd }
 			if args == nil then
 				return t
 			end
 
-			local pos = {}
-			--named args
-			for k, v in pairs(args) do
-				local tk = type(k)
-				if tk == "number" then
-					-- handle positional options
-					pos[k] = v
-				elseif tk == "string" then
-					if #k == 5 and k == "flags" then
-						-- handle flags
-						t.flags = require("util.parse").flags(v)
-					elseif type(v) == "string" then
-						-- handle named options (e.g. `-s <session>`)
-						t[k] = v
+			local targs = type(args)
+			if targs == "table" then
+				local pos = {}
+				for k, v in pairs(args) do
+					local tk = type(k)
+					if tk == "number" then
+						-- handle positional options
+						pos[k] = v
+					elseif tk == "string" then
+						if #k == 5 and k == "flags" then
+							-- handle flags
+							t.flags = require("util.parse").flags(v)
+						elseif type(v) == "string" then
+							-- handle named options (e.g. `-s <session>`)
+							t[k] = v
+						end
 					end
 				end
-			end
 
-			if #pos > 0 then
-				t.pos = pos
+				if #pos > 0 then
+					t.pos = pos
+				end
+			elseif targs == "string" then
+				t.pos = { args, table.unpack({ select(1, ...) }) }
 			end
 
 			config[#config + 1] = t
