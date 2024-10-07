@@ -1,3 +1,6 @@
 [submodule "luajit"]
 	path = luajit/luajit
 	url = https://luajit.org/git/luajit.git
+[submodule "tmux/tmux"]
+	path = tmux/tmux
+	url = git@github.com:xavierchanth/tmux
