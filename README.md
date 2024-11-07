@@ -1,5 +1,9 @@
 # neomux
 
+> Turns out there's already a plugin that solves the main reason I personally
+> had for creating this project `tmux-plugins/continuum`, I'm moving on to
+> other things. Maybe I will unarchive this idea in the future.
+
 This project intends to embed a Lua configuration interface into tmux. Stay
 tuned for more progress, and leave a star, it lets me know if this project would
 be useful to you!
